@@ -1,10 +1,12 @@
 from flask import Flask,render_template,url_for,request,get_template_attribute,redirect,jsonify
 import pandas as pd 
+from livereload import Server
 import numpy as np
 import pickle
 
 app = Flask(__name__)
-
+app.config['TEMPLATES_AUTO_RELOAD'] = True
+global l
 # load the model from disk
 dt=pickle.load(open('pred_data.pkl', 'rb'))
 scalars=pickle.load(open('scalars.pkl', 'rb'))
