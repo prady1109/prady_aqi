@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import pickle
 
-
+app = Flask(__name__)
 # load the model from disk
 dt=pickle.load(open('pred_data.pkl', 'rb'))
 scalars=pickle.load(open('scalars.pkl', 'rb'))
@@ -26,7 +26,7 @@ gb_r2=np.round(gb_model[1:],2)
 lr_r2=np.round(linear_model[1:],2)
 ann_r2=np.round(ann_model[1:],2)
 
-app = Flask(__name__)
+
 
 l={'dtr':[],'rtr':[],
            'svr':[],'xgb':[],
@@ -46,8 +46,8 @@ def home():
                                prediction_dtr=[],prediction_rtr=[],prediction_svr=[],prediction_xgb=[],prediction_gb=[],prediction_lr=[],prediction_ann=[])
                            
 
-@app.route('/dtr',methods=['POST'])
-def predict_dtr():
+@app.route('/predict',methods=['GET','POST'])
+def predict():
     y_pred_fin=[]
     x=np.array(np.reshape(dt[0][0],(1,8)))
     x=scalars[0].transform(x)
@@ -69,11 +69,7 @@ def predict_dtr():
     predic_dtr=y_pred_fin
  
     l['dtr']=predic_dtr
-    return render_template('predict.html',dtr_r2=dtr_r2,rtr_r2=rtr_r2,svr_r2=svr_r2,xgb_r2=xgb_r2,gb_r2=gb_r2,lr_r2=lr_r2,ann_r2=ann_r2,
-                           prediction_dtr=l['dtr'],prediction_rtr=l['rtr'],prediction_svr=l['svr'],prediction_xgb=l['xgb'],prediction_gb=l['gb'],prediction_lr=l['lr'],prediction_ann=l['ann'])
 
-@app.route('/rtr',methods=['POST'])
-def predict_rtr():
     y_pred_fin=[]
     x=np.array(np.reshape(dt[0][0],(1,8)))
     x=scalars[0].transform(x)
@@ -94,12 +90,7 @@ def predict_rtr():
     #y_pred_fin = scalars[1].inverse_transform(y_pred_fin)
     predic_rtr=y_pred_fin
     l['rtr']=predic_rtr
-    return render_template('predict.html',dtr_r2=dtr_r2,rtr_r2=rtr_r2,svr_r2=svr_r2,xgb_r2=xgb_r2,gb_r2=gb_r2,lr_r2=lr_r2,ann_r2=ann_r2,
-                           prediction_dtr=l['dtr'],prediction_rtr=l['rtr'],prediction_svr=l['svr'],prediction_xgb=l['xgb'],prediction_gb=l['gb'],prediction_lr=l['lr'],prediction_ann=l['ann'])
 
-
-@app.route('/svr',methods=['POST'])
-def predict_svr():
     y_pred_fin=[]
     x=np.array(np.reshape(dt[0][0],(1,8)))
     x=scalars[0].transform(x)
@@ -119,12 +110,7 @@ def predict_svr():
     
     predic_svr=y_pred_fin
     l['svr']=predic_svr
-    return render_template('predict.html',dtr_r2=dtr_r2,rtr_r2=rtr_r2,svr_r2=svr_r2,xgb_r2=xgb_r2,gb_r2=gb_r2,lr_r2=lr_r2,ann_r2=ann_r2,
-                           prediction_dtr=l['dtr'],prediction_rtr=l['rtr'],prediction_svr=l['svr'],prediction_xgb=l['xgb'],prediction_gb=l['gb'],prediction_lr=l['lr'],prediction_ann=l['ann'])
 
-
-@app.route('/xgb',methods=['POST'])
-def predict_xgb():
     y_pred_fin=[]
     x=np.array(np.reshape(dt[0][0],(1,8)))
     x=scalars[0].transform(x)
@@ -144,12 +130,7 @@ def predict_xgb():
     
     predic_xgb=y_pred_fin
     l['xgb']=predic_xgb
-    return render_template('predict.html',dtr_r2=dtr_r2,rtr_r2=rtr_r2,svr_r2=svr_r2,xgb_r2=xgb_r2,gb_r2=gb_r2,lr_r2=lr_r2,ann_r2=ann_r2,
-                           prediction_dtr=l['dtr'],prediction_rtr=l['rtr'],prediction_svr=l['svr'],prediction_xgb=l['xgb'],prediction_gb=l['gb'],prediction_lr=l['lr'],prediction_ann=l['ann'])
 
-
-@app.route('/gb',methods=['POST'])
-def predict_gb():
     y_pred_fin=[]
     x=np.array(np.reshape(dt[0][0],(1,8)))
     x=scalars[0].transform(x)
@@ -169,12 +150,7 @@ def predict_gb():
     
     predic_gb=y_pred_fin
     l['gb']=predic_gb
-    return render_template('predict.html',dtr_r2=dtr_r2,rtr_r2=rtr_r2,svr_r2=svr_r2,xgb_r2=xgb_r2,gb_r2=gb_r2,lr_r2=lr_r2,ann_r2=ann_r2,
-                           prediction_dtr=l['dtr'],prediction_rtr=l['rtr'],prediction_svr=l['svr'],prediction_xgb=l['xgb'],prediction_gb=l['gb'],prediction_lr=l['lr'],prediction_ann=l['ann'])
 
-
-@app.route('/linear',methods=['POST'])
-def predict_lr():
     y_pred_fin=[]
     x=np.array(np.reshape(dt[0][0],(1,8)))
     x=scalars[0].transform(x)
@@ -194,12 +170,7 @@ def predict_lr():
     
     predic_linear=y_pred_fin
     l['lr']=predic_linear
-    return render_template('predict.html',dtr_r2=dtr_r2,rtr_r2=rtr_r2,svr_r2=svr_r2,xgb_r2=xgb_r2,gb_r2=gb_r2,lr_r2=lr_r2,ann_r2=ann_r2,
-                           prediction_dtr=l['dtr'],prediction_rtr=l['rtr'],prediction_svr=l['svr'],prediction_xgb=l['xgb'],prediction_gb=l['gb'],prediction_lr=l['lr'],prediction_ann=l['ann'])
 
-
-@app.route('/ann',methods=['POST'])
-def predict_ann():
     y_pred_fin=[]
     x=np.array(np.reshape(dt[0][0],(1,8)))
     x=scalars[0].transform(x)
