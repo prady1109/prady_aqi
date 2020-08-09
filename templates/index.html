@@ -158,9 +158,6 @@
         {% block dtr %}{% endblock %}
 
 
-        <form action="{{ url_for('predict_dtr')}}" method="POST">
-        <button type="submit" class="btn btn-lg btn-block btn-primary">Predict</button>
-        </form>
       </div>
     </div>
     <div class="card mb-4 shadow-sm border-0">
@@ -169,22 +166,17 @@
       </div>
       <div class="card-body d-flex flex-column justify-content-center">
             {% block rtr %}{% endblock %}
-        <form  class="" action="{{ url_for('predict_rtr')}}" method="POST">
-        <button type="submit" class=" btn btn-lg btn-block btn-danger">Predict</button>
-        </form>
+
       </div>
     </div>
     <div class="card mb-4 shadow-sm border-0">
       <div class="card-header bg-success text-white">
-        <h5 class="my-0 font-weight-normal"> Support Vector Regressor</h5>
+        <h5 class="my-0 font-weight-normal"> Gradient Boost Regressor</h5>
       </div>
       <div class="card-body d-flex flex-column justify-content-center">
         
-          {% block svr %}{% endblock %}
-        
-        <form action="{{ url_for('predict_svr')}}" method="POST">
-        <button type="submit" class="btn btn-lg btn-block btn-success">Predict</button>
-        </form>
+          {% block gb %}{% endblock %}
+
       </div>
     </div>
     <div class="card mb-4 shadow-sm border-0">
@@ -195,35 +187,34 @@
        
           {% block xgb %}{% endblock %}
         
-        <form action="{{ url_for('predict_xgb')}}" method="POST">
-        <button type="submit" class="btn btn-lg btn-block btn-focus">Predict</button>
+  
+      </div>
+    </div>
+       <div class="card mb-4 shadow-sm border-0">
+      <div class="card-body d-flex flex-column justify-content-center">
+        <form action="{{ url_for('predict')}}" method="GET">
+        <button type="submit" class="btn btn-lg btn-block btn-brand">Predict</button>
         </form>
       </div>
     </div>
     <div class="card mb-4 shadow-sm border-0">
       <div class="card-header bg-brand text-white">
-        <h5 class="my-0 font-weight-normal">Gradient Boost Regressor</h5>
+        <h5 class="my-0 font-weight-normal">Linear Regressor</h5>
       </div>
       <div class="card-body d-flex flex-column justify-content-center">
        
-          {% block gb %}{% endblock %}
-       
-        <form action="{{ url_for('predict_gb')}}" method="POST">
-        <button type="submit" class="btn btn-lg btn-block btn-brand">Predict</button>
-        </form>
+          {% block lr %}{% endblock %}
+ 
       </div>
     </div>
         <div class="card mb-4 shadow-sm border-0">
       <div class="card-header bg-dark text-white">
-        <h5 class="my-0 font-weight-normal">Linear Regressor</h5>
+        <h5 class="my-0 font-weight-normal">Support Vector Regressor</h5>
       </div>
       <div class="card-body d-flex flex-column justify-content-center">
   
-          {% block lr %}{% endblock %}
-        
-        <form action="{{ url_for('predict_lr')}}" method="POST">
-        <button type="submit" class="btn btn-lg btn-block btn-dark">Predict</button>
-        </form>        
+          {% block svr %}{% endblock %}
+         
       </div>
     </div>
 
@@ -235,10 +226,7 @@
       
           {% block ann %}{% endblock %}
         
-        
-        <form action="{{ url_for('predict_ann')}}" method="POST">
-        <button type="submit" class="btn btn-lg btn-block btn-warning">Predict</button>
-        </form>            
+              
       </div>
     </div>
 
@@ -249,9 +237,6 @@
       <div class="card-body d-flex flex-column justify-content-center">
         
           {% block rnn %}{% endblock %}
-        
-        
-        <button type="submit" class="btn btn-lg btn-block btn-secondary">Predict</button>
         
       </div>
     </div>
