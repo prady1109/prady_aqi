@@ -1,0 +1,128 @@
+{% extends "index.html" %}
+
+{% block dtr %}
+{% if prediction_dtr|length!=0 %}
+	<table class="table mt-3 mb-4 ">
+	<thead class="thead-light">
+    <tr>
+      <th scope="col" class="pl-0">Date</th>
+      <th scope="col">PM2.5</th>
+    </tr>
+  </thead>
+	 {# here we iterate over every item in our list#}
+	 {% for item in prediction_dtr %}
+	     <tr><td class="pl-0">{{ item[1] }}</td><td >{{ item[0] }}</td></tr>
+	 {% endfor %}
+	 
+	</table>
+	
+{% endif %}
+{% endblock %}
+
+{% block rtr %}
+{% if prediction_rtr.__len__()!=0 %}
+	<table class="table mt-3 mb-4 ">
+	<thead class="thead-light">
+    <tr>
+      <th scope="col" class="pl-0">Date</th>
+      <th scope="col">PM2.5</th>
+    </tr>
+  </thead>
+	 {# here we iterate over every item in our list#}
+	 {% for item in prediction_rtr %}
+	     <tr><td class="pl-0">{{ item[1] }}</td><td >{{ item[0] }}</td></tr>
+	 {% endfor %}
+	 
+	</table>
+{% endif %}
+{% endblock %}
+
+{% block svr %}
+{% if prediction_svr.__len__()!=0 %}
+	<table class="table mt-3 mb-4 ">
+	<thead class="thead-light">
+    <tr>
+      <th scope="col" class="pl-0">Date</th>
+      <th scope="col">PM2.5</th>
+    </tr>
+  </thead>
+	 {# here we iterate over every item in our list#}
+	 {% for item in prediction_svr %}
+	     <tr><td class="pl-0">{{ item[1] }}</td><td >{{ item[0] }}</td></tr>
+	 {% endfor %}
+	 
+	</table>
+{% endif %}
+{% endblock %}
+
+{% block xgb %}
+{% if prediction_xgb.__len__()!=0 %}
+	<table class="table mt-3 mb-4 ">
+	<thead class="thead-light">
+    <tr>
+      <th scope="col" class="pl-0">Date</th>
+      <th scope="col">PM2.5</th>
+    </tr>
+  </thead>
+	 {# here we iterate over every item in our list#}
+	 {% for item in prediction_xgb %}
+	     <tr><td class="pl-0">{{ item[1] }}</td><td >{{ item[0] }}</td></tr>
+	 {% endfor %}
+	 
+	</table>
+{% endif %}
+{% endblock %}
+
+{% block gb %}
+{% if prediction_gb.__len__()!=0 %}
+	<table class="table mt-3 mb-4 ">
+	<thead class="thead-light">
+    <tr>
+      <th scope="col" class="pl-0">Date</th>
+      <th scope="col">PM2.5</th>
+    </tr>
+  </thead>
+	 {# here we iterate over every item in our list#}
+	 {% for item in prediction_gb %}
+	     <tr><td class="pl-0">{{ item[1] }}</td><td >{{ item[0] }}</td></tr>
+	 {% endfor %}
+	 
+	</table>
+{% endif %}
+{% endblock %}
+
+{% block lr %}
+{% if prediction_lr.__len__()!=0 %}
+	<table class="table mt-3 mb-4 ">
+	<thead class="thead-light">
+    <tr>
+      <th scope="col" class="pl-0">Date</th>
+      <th scope="col">PM2.5</th>
+    </tr>
+  </thead>
+	 {# here we iterate over every item in our list#}
+	 {% for item in prediction_lr %}
+	     <tr><td class="pl-0">{{ item[1] }}</td><td >{{ item[0] }}</td></tr>
+	 {% endfor %}
+	 
+	</table>
+{% endif %}
+{% endblock %}
+
+{% block ann %}
+{% if prediction_ann.__len__()!=0 %}
+	<table class="table mt-3 mb-4 ">
+	<thead class="thead-light">
+    <tr>
+      <th scope="col" class="pl-0">Date</th>
+      <th scope="col">PM2.5</th>
+    </tr>
+  </thead>
+	 {# here we iterate over every item in our list#}
+	 {% for item in prediction_ann %}
+	     <tr><td class="pl-0">{{ item[1] }}</td><td >{{ item[0][0] }}</td></tr>
+	 {% endfor %}
+	 
+	</table>
+{% endif %}
+{% endblock %}

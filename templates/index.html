@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>Air Quality Index Prediction</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/album/">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/pricing/">
+
+    <!-- Bootstrap core CSS -->
+<link href="{{ url_for('static', filename='assets/dist/css/bootstrap.css') }} "rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      .cen {
+        align-self: inherit;
+      }
+
+
+      .bg-brand{
+        background-color: #5867dd;
+      }
+      .btn-brand{
+        background-color: #5867dd;
+        color:#fff;
+      }
+      .bg-focus{
+        background-color: #f1911e;
+      }
+      .btn-focus{
+        background-color: #f1911e;
+        color:#fff;
+      }
+      
+      .progress-w-percent{
+        min-height:20px;
+        margin-bottom:20px}
+      .progress-w-percent .progress{
+        width:calc(100% - 60px);
+        float:left;
+        margin-top:8px}
+      .progress-w-percent .progress-value{
+        width:50px;
+        float:right;
+        text-align:right;
+        line-height:20px}
+        .progress
+        {display:-webkit-box;
+          display:-ms-flexbox;
+          display:flex;height:1rem;
+          overflow:hidden;
+          line-height:0;
+          font-size:.75rem;
+          background-color:#e9ecef;
+          border-radius:.25rem}
+ 
+        .progress-sm{height:5px}
+        .progress-md{height:8px}
+        .progress-lg{height:12px}
+
+        a.nav-link.active .nav-link-title{
+          color:#fff;
+        }
+        .nav-link-title{
+          color:#74788d;
+          font-weight:500;
+        }
+
+        .carousel-item{
+          height: 25rem !important;
+        
+        }
+
+     @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      @media (max-width:480px) {
+        .carousel-item{
+          height: 28rem !important;
+        }
+      }
+      @media (max-width:415px) {
+        .carousel-item{
+          height: 35rem !important;
+        }
+
+        .c1 h1{
+          font-size:1.6rem !important;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='album.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='pricing.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='carousel.css') }}" rel="stylesheet">
+  </head>
+  <body class="pt-0 pb-0" style="background-color: #f2f3f8">
+    <header>
+  <div class="collapse bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-white">About</h4>
+          <p class="text-muted">AIR QUALITY INDEX (AQI) tells how much polluted the air is at the given time. The key role in calculating the AQI is played by the concentration of the pollutants (e.g., ozone, Nitrogen dioxide, particle matter (PM2.5 and PM10) and sulfur dioxide) in the air at the given time.</p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4 class="text-white">Contact</h4>
+          <ul class="list-unstyled">
+            <li><a href="#" class="text-white">Follow on Twitter</a></li>
+            <li><a href="#" class="text-white">Like on Facebook</a></li>
+            <li><a href="#" class="text-white">Email me</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container d-flex justify-content-between">
+      <a href="#" class="navbar-brand d-flex align-items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="mr-2" viewBox="0 0 24 24" focusable="false"><img src="static/aqicnxl.png" class="pr-1" style="width:25px"></svg>
+        <strong>AQI</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+  <h1 class="display-4">Air Quality Index</h1>
+  <p class="lead" style="font-weight:350">AIR QUALITY INDEX (AQI) tells how much polluted the air is at the given time. The key role in calculating the AQI is played by the concentration of the pollutants (e.g., ozone, Nitrogen dioxide, particle matter (PM2.5 and PM10) and sulfur dioxide) in the air at the given time.</p>
+</div>
+
+<div class="container mt-4">
+  <div class="card-deck mb-3 text-center ">
+    <div class="card mb-4 shadow-sm border-0">
+      <div class="card-header bg-primary text-white">
+        <h5 class="my-0 font-weight-normal">Decision Tree Regressor</h5>
+      </div>
+      <div class="card-body d-flex flex-column justify-content-center">
+
+        {% block dtr %}{% endblock %}
+
+
+        <form action="{{ url_for('predict_dtr')}}" method="GET">
+        <button type="submit" class="btn btn-lg btn-block btn-primary">Predict</button>
+        </form>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm border-0">
+      <div class="card-header bg-danger text-white">
+        <h5 class="my-0 font-weight-normal">Random Forest Regressor</h5>
+      </div>
+      <div class="card-body d-flex flex-column justify-content-center">
+            {% block rtr %}{% endblock %}
+        <form  class="" action="{{ url_for('predict_rtr')}}" method="GET">
+        <button type="submit" class=" btn btn-lg btn-block btn-danger">Predict</button>
+        </form>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm border-0">
+      <div class="card-header bg-success text-white">
+        <h5 class="my-0 font-weight-normal"> Support Vector Regressor</h5>
+      </div>
+      <div class="card-body d-flex flex-column justify-content-center">
+        
+          {% block svr %}{% endblock %}
+        
+        <form action="{{ url_for('predict_svr')}}" method="GET">
+        <button type="submit" class="btn btn-lg btn-block btn-success">Predict</button>
+        </form>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm border-0">
+      <div class="card-header bg-focus text-white">
+        <h5 class="my-0 font-weight-normal"> XGB Regressor</h5>
+      </div>
+      <div class="card-body d-flex flex-column justify-content-center">
+       
+          {% block xgb %}{% endblock %}
+        
+        <form action="{{ url_for('predict_xgb')}}" method="GET">
+        <button type="submit" class="btn btn-lg btn-block btn-focus">Predict</button>
+        </form>
+      </div>
+    </div>
+    <div class="card mb-4 shadow-sm border-0">
+      <div class="card-header bg-brand text-white">
+        <h5 class="my-0 font-weight-normal">Gradient Boost Regressor</h5>
+      </div>
+      <div class="card-body d-flex flex-column justify-content-center">
+       
+          {% block gb %}{% endblock %}
+       
+        <form action="{{ url_for('predict_gb')}}" method="GET">
+        <button type="submit" class="btn btn-lg btn-block btn-brand">Predict</button>
+        </form>
+      </div>
+    </div>
+        <div class="card mb-4 shadow-sm border-0">
+      <div class="card-header bg-dark text-white">
+        <h5 class="my-0 font-weight-normal">Linear Regressor</h5>
+      </div>
+      <div class="card-body d-flex flex-column justify-content-center">
+  
+          {% block lr %}{% endblock %}
+        
+        <form action="{{ url_for('predict_lr')}}" method="GET">
+        <button type="submit" class="btn btn-lg btn-block btn-dark">Predict</button>
+        </form>        
+      </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm border-0">
+      <div class="card-header bg-warning text-white">
+        <h5 class="my-0 font-weight-normal">ANN Regressor</h5>
+      </div>
+      <div class="card-body d-flex flex-column justify-content-center">
+      
+          {% block ann %}{% endblock %}
+        
+        
+        <form action="{{ url_for('predict_ann')}}" method="GET">
+        <button type="submit" class="btn btn-lg btn-block btn-warning">Predict</button>
+        </form>            
+      </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm border-0">
+      <div class="card-header bg-secondary text-white">
+        <h5 class="my-0 font-weight-normal">RNN Regressor</h5>
+      </div>
+      <div class="card-body d-flex flex-column justify-content-center">
+        
+          {% block rnn %}{% endblock %}
+        
+        
+        <button type="submit" class="btn btn-lg btn-block btn-secondary">Predict</button>
+        
+      </div>
+    </div>
+</div>
+
+  <div id="myCarousel" class="carousel slide" data-ride="carousel"  >
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner bg-success">
+      <div class="carousel-item active bg-info">
+        <div class="container">
+        <div class="carousel-caption text-left pt-0">
+            <h1>About RSquare Evaluation</h1>
+            <p>This evaluation metrics tell us about how well the model has fitted on the training dataset i.e. how well the model has learned the relationship between the independent variables and the dependent variable.</p>
+            <p><a class="btn btn-lg btn-primary" href="https://en.wikipedia.org/wiki/Coefficient_of_determination" role="button">Learn more</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item" style="background-color:#cf46cc;">
+     
+        <div class="container">
+          <div class="carousel-caption text-white pt-0">
+            <h1>About RMSE Evaluation</h1>
+            <p>Root Mean Square Error method of evaluation is a well reknowned one and is used everywhere to calvulate the error between the predicted and the actual values. Here Rmse is calculated on 5-folds i.e. using K-fold cross validation.</p>
+            <p><a class="btn btn-lg btn-dark" " href="https://en.wikipedia.org/wiki/Root-mean-square_deviation" role="button">Learn more</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item c1" >
+        
+        <div class="container mb-4">
+          <div class="carousel-caption text-right pt-0 ">
+            <h1>About the Dataset</h1>
+            <p>The dataset for traing and testing the models  has benn taken from Central Pollution Control Board website.
+            The dataset has independent features which are: Temperature, Humidity, Wind-Direction, Wind-Speed, Month, Previous Day PM2.5 Concenteration, Solar Radiation and Pressure. The independent feature which has to be predicted is the next day PM2.5 concenterate.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+
+
+
+<div class="card border-0" style="border-radius: 5px; box-shadow: 1px 1px 4px 4px rgba(82, 63, 105, 0.05);">
+    <div class="card-header" style="background-color:#fff">
+        
+            <h3 class="card-title mb-0">Evaluation Metrics</h3>
+    </div>
+
+    <div class="card-body">
+        <div class="mb-4" style="text-align: center;">
+            <ul class="justify-content-center  nav nav-pills nav-tabs-btn nav-pills-btn-brand" role="tablist" >
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#r2_score" role="tab" aria-selected="true">
+                        <span class="nav-link-title" style="">R Square</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " data-toggle="tab" href="#rmse_k" role="tab" aria-selected="false">
+                        <span class="nav-link-icon"><i class="flaticon2-position"></i></span>
+                        <span class="nav-link-title">RMSE:KFold</span>
+                    </a>
+                </li>
+
+            </ul>
+          </div>
+            <div class="tab-content">
+                <div class="tab-pane fade active show" id="r2_score" role="tabpanel">
+                 <h5 class="mb-1 mt-0 font-weight-normal">Decision Tree Regression</h5>
+                   <div class="progress-w-percent">
+                      <span class="progress-value font-weight-bold">{{dtr_r2[0]}}</span>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width:{{dtr_r2[0] * 100}}%"aria-valuenow="{{ dtr_r2[0] }}" aria-valuemin="0" aria-valuemax="1"></div>
+                      </div>
+                   </div>
+
+                   <h5 class="mb-1 mt-0 font-weight-normal">Random Forest Regression</h5>
+                   <div class="progress-w-percent">
+                      <span class="progress-value font-weight-bold">{{rtr_r2[0]}}</span>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar bg-danger" role="progressbar" style="width:{{rtr_r2[0] * 100}}%"aria-valuenow="{{ rtr_r2[0] }}" aria-valuemin="0" aria-valuemax="1"></div>
+                      </div>
+                   </div>
+                   <h5 class="mb-1 mt-0 font-weight-normal">Support Vector Regression</h5>
+                   <div class="progress-w-percent">
+                      <span class="progress-value font-weight-bold">{{svr_r2[0]}}0</span>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar bg-success" role="progressbar" style="width:{{svr_r2[0] * 100}}%"aria-valuenow="{{ svr_r2[0] }}" aria-valuemin="0" aria-valuemax="1"></div>
+                      </div>
+                   </div>
+                   <h5 class="mb-1 mt-0 font-weight-normal">XGB Regression</h5>
+                   <div class="progress-w-percent">
+                      <span class="progress-value font-weight-bold">{{xgb_r2[0]}}</span>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar bg-focus" role="progressbar" style="width:{{xgb_r2[0] * 100}}%"aria-valuenow="{{ xgb_r2[0] }}" aria-valuemin="0" aria-valuemax="1"></div>
+                      </div>
+                   </div>
+                   <h5 class="mb-1 mt-0 font-weight-normal">Gradient Boost Regression</h5>
+                   <div class="progress-w-percent">
+                      <span class="progress-value font-weight-bold">{{gb_r2[0]}}</span>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar bg-brand" role="progressbar" style="width:{{gb_r2[0] * 100}}%"aria-valuenow="{{ gb_r2[0] }}" aria-valuemin="0" aria-valuemax="1"></div>
+                      </div>
+                   </div>
+                   <h5 class="mb-1 mt-0 font-weight-normal">Linear Regression</h5>
+                   <div class="progress-w-percent">
+                      <span class="progress-value font-weight-bold">{{lr_r2[0]}}</span>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar bg-dark" role="progressbar" style="width:{{lr_r2[0] * 100}}%"aria-valuenow="{{ lr_r2[0] }}" aria-valuemin="0" aria-valuemax="1"></div>
+                      </div>
+                   </div>
+                   <h5 class="mb-1 mt-0 font-weight-normal">Articial Neural Network </h5>
+                   <div class="progress-w-percent">
+                      <span class="progress-value font-weight-bold">{{ann_r2[0]}}</span>
+                      <div class="progress progress-sm">
+                        <div class="progress-bar bg-warning" role="progressbar" style="width:{{ann_r2[0] * 100}}%"aria-valuenow="{{ ann_r2[0] }}" aria-valuemin="0" aria-valuemax="1"></div>
+                      </div>
+                   </div>
+                </div>
+                <div class="tab-pane fade" id="rmse_k" role="tabpanel">
+                  <table class="my-0 table">
+                <thead >
+                <tr>
+                  <th style="width:40%; border-top:0;  ">Model</th>
+                  <th style="width:60%; border-top:0; ">RMSE (%)</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Decision Tree Regression</td>
+                    <td class="d-xl-table-cell" >
+                      <div class="progress mt-1">
+                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="{{dtr_r2[1]}}" aria-valuemin="0" aria-valuemax="100" style="width: {{dtr_r2[1]}}%;">{{dtr_r2[1]}}</div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Random Forest Regression</td>
+                    <td class="d-xl-table-cell">
+                      <div class="progress mt-1">
+                        <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="{{rtr_r2[1]}}" aria-valuemin="0" aria-valuemax="100" style="width: {{rtr_r2[1]}}%;">{{rtr_r2[1]}}</div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Support Vector Regression</td>
+                    <td class="d-xl-table-cell">
+                      <div class="progress mt-1">
+                        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{svr_r2[1]}}" aria-valuemin="0" aria-valuemax="100" style="width: {{svr_r2[1]}}%;">{{svr_r2[1]}}</div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>XGB Regression</td>
+                    <td class="d-xl-table-cell">
+                      <div class="progress mt-1">
+                        <div class="progress-bar bg-focus" role="progressbar" aria-valuenow="{{xgb_r2[1]}}" aria-valuemin="0" aria-valuemax="100" style="width: {{xgb_r2[1]}}%;">{{xgb_r2[1]}}</div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Gradient Boost Regression</td>
+                    <td class="d-xl-table-cell">
+                      <div class="progress mt-1">
+                        <div class="progress-bar bg-brand" role="progressbar" aria-valuenow="{{gb_r2[1]}}" aria-valuemin="0" aria-valuemax="100" style="width: {{gb_r2[1]}}%;">{{gb_r2[1]}}</div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Linear Regression</td>
+                    <td class="d-xl-table-cell">
+                      <div class="progress mt-1">
+                        <div class="progress-bar bg-dark" role="progressbar" aria-valuenow="{{lr_r2[1]}}" aria-valuemin="0" aria-valuemax="100" style="width: {{lr_r2[1]}}%;">{{lr_r2[1]}}</div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Artificial Neural Network</td>
+                    <td class="d-xl-table-cell">
+                      <div class="progress mt-1">
+                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="{{ann_r2[1]}}" aria-valuemin="0" aria-valuemax="100" style="width: {{ann_r2[1]}}%;">{{ann_r2[1]}}</div>
+                      </div>
+                    </td>
+                  </tr>
+
+                </tbody></table></div>
+       
+      </div>
+</div>
+</div>
+
+    </div>
+
+
+
+<footer class="text-muted">
+  <div class="container">
+    <p class="float-right">
+      <a href="#">Back to top</a>
+    </p>
+    <p>This is &copy; Pradhuman Gupta</p>
+  </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script>window.jQuery || document.write('<script src="{{ url_for('static', filename='assets/js/vendor/jquery.slim.min.js') }}"><\/script>')</script><script src="{{ url_for('static', filename='assets/dist/js/bootstrap.bundle.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+
+
+</body>
+
+</html>
