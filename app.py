@@ -1,11 +1,12 @@
 from flask import Flask,render_template,url_for,request,get_template_attribute,redirect,jsonify
 import pandas as pd 
-
+import tensorflow
 import numpy as np
 import pickle
 
-app = Flask(__name__)
+
 # load the model from disk
+
 dt=pickle.load(open('pred_data.pkl', 'rb'))
 scalars=pickle.load(open('scalars.pkl', 'rb'))
 
@@ -16,6 +17,7 @@ xgb_model=pickle.load(open('xgb_model.pkl', 'rb'))
 gb_model=pickle.load(open('gradboost_model.pkl', 'rb'))
 linear_model=pickle.load(open('linear_model.pkl', 'rb'))
 
+ann=tensorflow.keras.models.load_model("ann")
 ann_model=pickle.load(open('ann_model.pkl', 'rb'))
 
 dtr_r2=np.round(dtr_model[1:],2)
@@ -24,9 +26,9 @@ svr_r2=np.round(svr_model[1:],2)
 xgb_r2=np.round(xgb_model[1:],2)
 gb_r2=np.round(gb_model[1:],2)
 lr_r2=np.round(linear_model[1:],2)
-ann_r2=np.round(ann_model[1:],2)
+ann_r2=np.round(ann_model[0:],2)
 
-
+app = Flask(__name__)
 
 l={'dtr':[],'rtr':[],
            'svr':[],'xgb':[],
@@ -174,7 +176,7 @@ def predict():
     y_pred_fin=[]
     x=np.array(np.reshape(dt[0][0],(1,8)))
     x=scalars[0].transform(x)
-    y_pred=ann_model[0].predict(x)
+    y_pred=ann.predict(x)
     y_pred=scalars[1].inverse_transform(y_pred)
     y_pred=np.round(y_pred,3)
     y_pred_fin.append([y_pred[0],dt[2][0]])
@@ -182,7 +184,7 @@ def predict():
     for i in range(1,7):
         x=np.array(np.reshape(dt[0][i],(1,8)))
         x=scalars[0].transform(x)
-        y_pred=ann_model[0].predict(x)
+        y_pred=ann.predict(x)
         y_pred=scalars[1].inverse_transform(y_pred)
         y_pred=np.round(y_pred,3)
         y_pred_fin.append([y_pred[0],dt[2][i]])
