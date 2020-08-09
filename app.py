@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import pickle
 
-
 app = Flask(__name__)
 
 # load the model from disk
@@ -13,17 +12,19 @@ scalars=pickle.load(open('scalars.pkl', 'rb'))
 dtr_model=pickle.load(open('dtr_model.pkl', 'rb'))
 rtr_model=pickle.load(open('rtr_model.pkl', 'rb'))
 svr_model=pickle.load(open('svr_model.pkl', 'rb'))
-#xgb_model=pickle.load(open('xgb_model.pkl', 'rb'))
+xgb_model=pickle.load(open('xgb_model.pkl', 'rb'))
 gb_model=pickle.load(open('gradboost_model.pkl', 'rb'))
 linear_model=pickle.load(open('linear_model.pkl', 'rb'))
 
+ann_model=pickle.load(open('ann_model.pkl', 'rb'))
 
 dtr_r2=np.round(dtr_model[1:],2)
 rtr_r2=np.round(rtr_model[1:],2)
 svr_r2=np.round(svr_model[1:],2)
-#xgb_r2=np.round(xgb_model[1:],2)
+xgb_r2=np.round(xgb_model[1:],2)
 gb_r2=np.round(gb_model[1:],2)
 lr_r2=np.round(linear_model[1:],2)
+ann_r2=np.round(ann_model[1:],2)
 
 
 l={'dtr':[],'rtr':[],
@@ -40,8 +41,10 @@ def home():
         l['lr']=[]
         l['ann']=[]
 
-        return render_template('index.html',dtr_r2=dtr_r2,rtr_r2=rtr_r2,svr_r2=svr_r2,xgb_r2=' ',gb_r2=gb_r2,lr_r2=lr_r2,ann_r2=' ',
+        return render_template('index.html',dtr_r2=dtr_r2,rtr_r2=rtr_r2,svr_r2=svr_r2,xgb_r2=xgb_r2,gb_r2=gb_r2,lr_r2=lr_r2,ann_r2=ann_r2,
                                prediction_dtr=[],prediction_rtr=[],prediction_svr=[],prediction_xgb=[],prediction_gb=[],prediction_lr=[],prediction_ann=[])
+                           
+
 @app.route('/dtr',methods=['GET'])
 def predict_dtr():
     y_pred_fin=[]
@@ -192,6 +195,8 @@ def predict_lr():
     l['lr']=predic_linear
     return render_template('predict.html',dtr_r2=dtr_r2,rtr_r2=rtr_r2,svr_r2=svr_r2,xgb_r2=xgb_r2,gb_r2=gb_r2,lr_r2=lr_r2,ann_r2=ann_r2,
                            prediction_dtr=l['dtr'],prediction_rtr=l['rtr'],prediction_svr=l['svr'],prediction_xgb=l['xgb'],prediction_gb=l['gb'],prediction_lr=l['lr'],prediction_ann=l['ann'])
+
+
 @app.route('/ann',methods=['GET'])
 def predict_ann():
     y_pred_fin=[]
@@ -216,6 +221,6 @@ def predict_ann():
     return render_template('predict.html',dtr_r2=dtr_r2,rtr_r2=rtr_r2,svr_r2=svr_r2,xgb_r2=xgb_r2,gb_r2=gb_r2,lr_r2=lr_r2,ann_r2=ann_r2,
                            prediction_dtr=l['dtr'],prediction_rtr=l['rtr'],prediction_svr=l['svr'],prediction_xgb=l['xgb'],prediction_gb=l['gb'],prediction_lr=l['lr'],prediction_ann=l['ann'])
 
-       
+
 if __name__ == '__main__':
 	app.run(debug=True,use_reloader=True)
