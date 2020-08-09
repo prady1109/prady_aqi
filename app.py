@@ -1,11 +1,10 @@
 from flask import Flask,render_template,url_for,request,get_template_attribute,redirect,jsonify
 import pandas as pd 
+
 import numpy as np
 import pickle
 
-app = Flask(__name__)
-app.config['TEMPLATES_AUTO_RELOAD'] = True
-global l
+
 # load the model from disk
 dt=pickle.load(open('pred_data.pkl', 'rb'))
 scalars=pickle.load(open('scalars.pkl', 'rb'))
@@ -27,6 +26,7 @@ gb_r2=np.round(gb_model[1:],2)
 lr_r2=np.round(linear_model[1:],2)
 ann_r2=np.round(ann_model[1:],2)
 
+app = Flask(__name__)
 
 l={'dtr':[],'rtr':[],
            'svr':[],'xgb':[],
@@ -46,7 +46,7 @@ def home():
                                prediction_dtr=[],prediction_rtr=[],prediction_svr=[],prediction_xgb=[],prediction_gb=[],prediction_lr=[],prediction_ann=[])
                            
 
-@app.route('/dtr',methods=['GET'])
+@app.route('/dtr',methods=['GET','POST'])
 def predict_dtr():
     y_pred_fin=[]
     x=np.array(np.reshape(dt[0][0],(1,8)))
@@ -72,7 +72,7 @@ def predict_dtr():
     return render_template('predict.html',dtr_r2=dtr_r2,rtr_r2=rtr_r2,svr_r2=svr_r2,xgb_r2=xgb_r2,gb_r2=gb_r2,lr_r2=lr_r2,ann_r2=ann_r2,
                            prediction_dtr=l['dtr'],prediction_rtr=l['rtr'],prediction_svr=l['svr'],prediction_xgb=l['xgb'],prediction_gb=l['gb'],prediction_lr=l['lr'],prediction_ann=l['ann'])
 
-@app.route('/rtr',methods=['GET'])
+@app.route('/rtr',methods=['GET','POST'])
 def predict_rtr():
     y_pred_fin=[]
     x=np.array(np.reshape(dt[0][0],(1,8)))
@@ -98,7 +98,7 @@ def predict_rtr():
                            prediction_dtr=l['dtr'],prediction_rtr=l['rtr'],prediction_svr=l['svr'],prediction_xgb=l['xgb'],prediction_gb=l['gb'],prediction_lr=l['lr'],prediction_ann=l['ann'])
 
 
-@app.route('/svr',methods=['GET'])
+@app.route('/svr',methods=['GET','POST'])
 def predict_svr():
     y_pred_fin=[]
     x=np.array(np.reshape(dt[0][0],(1,8)))
@@ -123,7 +123,7 @@ def predict_svr():
                            prediction_dtr=l['dtr'],prediction_rtr=l['rtr'],prediction_svr=l['svr'],prediction_xgb=l['xgb'],prediction_gb=l['gb'],prediction_lr=l['lr'],prediction_ann=l['ann'])
 
 
-@app.route('/xgb',methods=['GET'])
+@app.route('/xgb',methods=['GET','POST'])
 def predict_xgb():
     y_pred_fin=[]
     x=np.array(np.reshape(dt[0][0],(1,8)))
@@ -148,7 +148,7 @@ def predict_xgb():
                            prediction_dtr=l['dtr'],prediction_rtr=l['rtr'],prediction_svr=l['svr'],prediction_xgb=l['xgb'],prediction_gb=l['gb'],prediction_lr=l['lr'],prediction_ann=l['ann'])
 
 
-@app.route('/gb',methods=['GET'])
+@app.route('/gb',methods=['GET','POST'])
 def predict_gb():
     y_pred_fin=[]
     x=np.array(np.reshape(dt[0][0],(1,8)))
@@ -173,7 +173,7 @@ def predict_gb():
                            prediction_dtr=l['dtr'],prediction_rtr=l['rtr'],prediction_svr=l['svr'],prediction_xgb=l['xgb'],prediction_gb=l['gb'],prediction_lr=l['lr'],prediction_ann=l['ann'])
 
 
-@app.route('/linear',methods=['GET'])
+@app.route('/linear',methods=['GET','POST'])
 def predict_lr():
     y_pred_fin=[]
     x=np.array(np.reshape(dt[0][0],(1,8)))
@@ -198,7 +198,7 @@ def predict_lr():
                            prediction_dtr=l['dtr'],prediction_rtr=l['rtr'],prediction_svr=l['svr'],prediction_xgb=l['xgb'],prediction_gb=l['gb'],prediction_lr=l['lr'],prediction_ann=l['ann'])
 
 
-@app.route('/ann',methods=['GET'])
+@app.route('/ann',methods=['GET','POST'])
 def predict_ann():
     y_pred_fin=[]
     x=np.array(np.reshape(dt[0][0],(1,8)))
