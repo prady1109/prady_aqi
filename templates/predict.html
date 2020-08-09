@@ -1,7 +1,7 @@
 {% extends "index.html" %}
 
 {% block dtr %}
-{% if prediction_dtr|length!=0 %}
+{% if prediction_dtr.__len__()!=0 %}
 	<table class="table mt-3 mb-4 ">
 	<thead class="thead-light">
     <tr>
@@ -20,7 +20,7 @@
 {% endblock %}
 
 {% block rtr %}
-{% if prediction_rtr|length!=0  %}
+{% if prediction_rtr.__len__()!=0  %}
 	<table class="table mt-3 mb-4 ">
 	<thead class="thead-light">
     <tr>
@@ -38,7 +38,7 @@
 {% endblock %}
 
 {% block svr %}
-{% if prediction_svr|length!=0 %}
+{% if prediction_svr.__len__()!=0 %}
 	<table class="table mt-3 mb-4 ">
 	<thead class="thead-light">
     <tr>
@@ -56,7 +56,7 @@
 {% endblock %}
 
 {% block xgb %}
-{% if prediction_xgb|length!=0  %}
+{% if prediction_xgb.__len__()!=0  %}
 	<table class="table mt-3 mb-4 ">
 	<thead class="thead-light">
     <tr>
@@ -74,7 +74,7 @@
 {% endblock %}
 
 {% block gb %}
-{% if prediction_gb|length!=0 %}
+{% if prediction_gb.__len__()!=0 %}
 	<table class="table mt-3 mb-4 ">
 	<thead class="thead-light">
     <tr>
@@ -92,7 +92,7 @@
 {% endblock %}
 
 {% block lr %}
-{% if prediction_lr|length!=0 %}
+{% if prediction_lr.__len__()!=0 %}
 	<table class="table mt-3 mb-4 ">
 	<thead class="thead-light">
     <tr>
@@ -110,7 +110,7 @@
 {% endblock %}
 
 {% block ann %}
-{% if prediction_dtr|length!=0  %}
+{% if prediction_ann.__len__()!=0  %}
 	<table class="table mt-3 mb-4 ">
 	<thead class="thead-light">
     <tr>
