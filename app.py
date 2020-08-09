@@ -1,6 +1,5 @@
 from flask import Flask,render_template,url_for,request,get_template_attribute,redirect,jsonify
 import pandas as pd 
-from livereload import Server
 import numpy as np
 import pickle
 
