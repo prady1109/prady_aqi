@@ -7,10 +7,11 @@ import pickle
 
 app = Flask(__name__)
 
-
+dtr_model=pickle.load(open('dtr_model.pkl', 'rb'))
+dtr_r2=np.round(dtr_model[1:],2)
 @app.route('/')
 def home():
-        return render_template('ind.html',nam='hi')
+        return render_template('ind.html',nam=dtr_r2)
                            
 
 
